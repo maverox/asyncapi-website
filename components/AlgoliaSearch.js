@@ -8,8 +8,8 @@ import clsx from 'clsx'
 
 export const INDEX_NAME = 'asyncapi';
 export const DOCS_INDEX_NAME = 'asyncapi-docs';
-const APP_ID = 'Z621OGRI9Y';
-const API_KEY = '5a4122ae46ce865146d23d3530595d38';
+const APP_ID = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+const API_KEY = process.env.NEXT_PUBLIC_ALGOLIA_API_KEY;
 
 const SearchContext = createContext({});
 
@@ -155,12 +155,12 @@ export function SearchButton({ children, indexName = INDEX_NAME, ...props }) {
   }, [onInput, searchButtonRef]);
 
   return (
-    <button 
-      type="button" 
-      ref={searchButtonRef} 
+    <button
+      type="button"
+      ref={searchButtonRef}
       onClick={() => {
         onOpen(indexName);
-      }} 
+      }}
       {...props}
       data-testid="Search-Button"
     >
