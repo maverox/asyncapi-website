@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 export default function Button({
   text,
   href,
@@ -14,12 +15,12 @@ export default function Button({
   ...props
 }) {
 
-  const smallButtonClasses = twMerge(`${bgClassName} ${textClassName} transition-all duration-500 ease-in-out rounded-md px-3 py-2 text-sm font-medium tracking-heading ${className || ''}`)
-  const classNames = twMerge(`${bgClassName} ${textClassName} transition-all duration-500 ease-in-out rounded-md px-4 py-3 text-md font-semibold tracking-heading ${className || ''}`)
+  const smallButtonClasses = twMerge(`${bgClassName} ${textClassName} transition-all duration-500  ease-in-out rounded-md px-3 py-2 text-sm font-medium tracking-heading flex justify-center items-center ${className || ''}`)
+  const classNames = twMerge(`${bgClassName} ${textClassName} transition-all duration-500 ease-in-out rounded-md px-4 py-3 text-md font-semibold tracking-heading flex justify-center items-center ${className || ''}`)
 
   if (!href) {
     return (
-      <button {...props} type={type} className={buttonSize === 'small' ? smallButtonClasses : classNames} data-testid="Button-main" > 
+      <button {...props} type={type} className={buttonSize === 'small' ? smallButtonClasses : classNames} data-testid="Button-main" >
         {
           icon && iconPosition === 'left' && (
             <span className="inline-block mr-2" data-testid="Button-icon-left">{icon}</span>
@@ -53,4 +54,25 @@ export default function Button({
     </Link>
   )
 }
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  type: PropTypes.string,
+  target: PropTypes.string,
+  icon: PropTypes.node,
+  iconPosition: PropTypes.oneOf(['left', 'right']),
+  className: PropTypes.string,
+  bgClassName: PropTypes.string,
+  textClassName: PropTypes.string,
+  buttonSize: PropTypes.oneOf(['small', 'large']),
+}
+
+Button.defaultProps = {
+  type: 'button',
+  target: '_self',
+  iconPosition: 'right',
+  buttonSize: 'large',
+}
+
 
